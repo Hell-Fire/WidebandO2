@@ -19,10 +19,10 @@ const int initialRampUpStep = 255 / (14.0 / 0.5); // Heater warm up stage, this 
 
 double heatTarget = 2.3 / 1300.0 * 200.0; // Target voltage, this is pulse voltage divided by total target resistance, times the target cell resistance
 int heatSampleTime = 500; // How often the heater is sampled for PID, in milliseconds
-double pumpTarget = 0.45;
+double pumpTarget = 0.45; // Target Nernst cell voltage
 
-//#define DEBUG
-//#define NO_SERIAL
+//#define DEBUG       // DEBUG enables human readable logging and info messages
+//#define NO_SERIAL   // NO_SERIAL disables the CSV output of the controllers controls, a nice way to view this log is with OpenLogViewer - http://olv.diyefi.org/
 
 
 
