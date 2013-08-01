@@ -15,6 +15,7 @@
 const float targetLambda = 1.0; // Narrowband simulation, cross point in lambda
 const float widebandTop = 2.0; // Where the +5v of the linear wideband output is
 
+const int warmUpDelay = 20000; // Initial delay we wait before starting heating of the sensor, in millis
 const int initialRampUpTill = 255 / 14.0 * 7.5; // Heater warm up stage, this sets the top (TODO: Measure input voltage, max output should be 7.5v)
 const int initialRampUpStep = 255 / (14.0 / 0.5); // Heater warm up stage, this is how fast the voltage ramps up per second, spec sheet says .5v a second).
 
@@ -34,17 +35,19 @@ int speedOfLoop = 4; // How many millis it takes for loop to run, on Teensy++ 2.
   Pin Definitions
 */
 #ifdef BOARD_TEENSYPP20
+// Inputs
 const int PIN_VGND = PIN_F0; // Analog In - Level of the virtual ground
 const int PIN_VS = PIN_F1; // Analog In - Reads Nernst Cell voltage
 const int PIN_IPA = PIN_F2; // Analog In - Measures pump current via differential amp
+
+// Sensor control
 const int POUT_VS = PIN_B6; // Digital Out - Pulses Nernst Cell to calculate internal resistance
-const int POUT_NARROW = PIN_F7; // Digital Out - Feeds voltage divider, 0-1v signal to ECU
-const int POUT_IP = PIN_B4; // Analog Out - Pump cell current output, keeps Nernst cell in stoich range
 const int POUT_HEATER = PIN_B5; // Analog Out - Heater control, keeps Nernst cell at right temperature
+const int POUT_IP = PIN_B4; // Analog Out - Pump cell current output, keeps Nernst cell in stoich range
+
+// Outputs
+const int POUT_NARROW = PIN_D0; // Digital Out - Feeds voltage divider, 0-1v signal to ECU
 const int POUT_WIDE = PIN_D1; // Analog Out - Wideband linear output
-
-
-const int PIN_RPM = -1;
 
 #else
 #error "No board defined"
@@ -199,11 +202,8 @@ void setup() {
   
   DPL("Hello Master!");
   
-  //DPL("Waiting for engine crank");
-  // TODO: Watch RPM input, we're looking for at least post crank speeds (200RPM+)
-  
-  //DPL("Performing delay prior to warmup");
-  //delay(5000); // Wait for some warm gasses through the exhaust
+  DPL("Performing delay prior to warmup");
+  delay(warmUpDelay); // Wait for some warm gasses through the exhaust
   
   // Slowly ramp up the sensors heater
   DPL("Warming up!");
