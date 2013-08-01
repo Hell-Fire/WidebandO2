@@ -104,6 +104,8 @@ T 48800 51100 5 10 0 1 0 0 1
 footprint=DIP14
 T 46600 51300 5 10 0 0 0 0 1
 symversion=0.1
+T 46400 48800 5 10 0 0 0 0 1
+slot=4
 }
 C 41400 43400 1 0 0 quad_opamp-1.sym
 {
@@ -116,7 +118,7 @@ footprint=DIP14
 T 41600 45900 5 10 0 0 0 0 1
 symversion=0.1
 T 41400 43400 5 10 0 0 0 0 1
-slot=4
+slot=1
 }
 C 45500 46000 1 0 0 quad_opamp-1.sym
 {
@@ -129,9 +131,11 @@ footprint=DIP14
 T 45700 48500 5 10 0 0 0 0 1
 symversion=0.1
 T 45500 46000 5 10 0 0 0 0 1
-slot=3
+slot=2
 T 45500 46000 5 10 0 0 0 0 1
 slotdef=3:10,9,11,4,8
+T 45500 46000 5 10 0 0 0 0 1
+slotdef=2:6,5,11,4,7
 }
 C 41600 46000 1 0 0 quad_opamp-1.sym
 {
@@ -144,9 +148,11 @@ footprint=DIP14
 T 41800 48500 5 10 0 0 0 0 1
 symversion=0.1
 T 41600 46000 5 10 0 0 0 0 1
-slot=2
+slot=3
 T 41600 46000 5 10 0 0 0 0 1
 slotdef=2:6,5,11,4,7
+T 41600 46000 5 10 0 0 0 0 1
+slotdef=3:10,9,11,4,8
 }
 C 52800 41700 1 0 0 connector20-2.sym
 {
@@ -378,11 +384,11 @@ device=INPUT
 T 54300 44900 5 10 1 1 0 0 1
 net=+2.5V:1
 }
-C 56000 42300 1 180 0 output-1.sym
+C 52900 49100 1 180 0 output-1.sym
 {
-T 55900 42000 5 10 0 0 180 0 1
+T 52800 48800 5 10 0 0 180 0 1
 device=OUTPUT
-T 54000 41900 5 10 1 1 0 0 1
+T 51500 49200 5 10 1 1 0 0 1
 net=POUT_NARROW:1
 }
 C 56000 49600 1 90 0 5V-plus-1.sym
@@ -448,7 +454,7 @@ T 42800 46200 5 10 1 1 270 0 1
 refdes=R7
 T 42400 45900 5 10 1 1 270 0 1
 value=61.9
-T 42500 46400 5 10 1 1 0 0 1
+T 42500 46400 5 10 0 1 0 0 1
 footprint=AXIAL_LAY 400
 }
 C 44600 47200 1 0 0 resistor-1.sym
@@ -703,20 +709,45 @@ N 46400 50100 46400 49400 4
 N 40500 49800 40700 49800 4
 T 40200 41400 9 10 1 0 0 0 2
 Fuse holders are two clamps ("0.85 space between clamps).
-Each clamp is two parallel to the fuse, in the center of the clamp ("0.2 apart).
+Each clamp is two holes parallel to the fuse, in the center of the clamp ("0.2 apart).
 T 40200 40900 9 10 1 0 0 0 2
 Power connector is a vertical 2 pin molex, spacing of "0.2.
 3 amp max per fuse (heater nominally draws less than an amp)
-T 40200 40600 9 10 1 0 0 0 1
+T 40200 40400 9 10 1 0 0 0 2
 Narrowband and Linear outputs use disconnectable screwdown terminals.
-C 47300 40500 1 0 0 connector2-2.sym
+Pins for the power and screwdowns are 0.05" holes spaced 0.2" apart.
+C 47600 40100 1 0 0 connector2-2.sym
 {
-T 48000 41800 5 10 1 1 0 6 1
+T 48300 41400 5 10 1 1 0 6 1
 refdes=CONN_POWER
-T 47600 41750 5 10 0 0 0 0 1
+T 47900 41350 5 10 0 0 0 0 1
 device=CONNECTOR_2
-T 47600 41950 5 10 0 0 0 0 1
+T 47900 41550 5 10 0 0 0 0 1
 footprint=CONN_POWER.fp
+T 47600 40100 5 10 0 0 0 0 1
+pins=2
 }
-C 47200 40600 1 0 0 gnd-1.sym
-C 47100 41300 1 0 0 12V-plus-1.sym
+C 47500 40200 1 0 0 gnd-1.sym
+C 47400 40900 1 0 0 12V-plus-1.sym
+C 46800 42700 1 0 0 input-1.sym
+{
+T 46800 43000 5 10 0 0 0 0 1
+device=INPUT
+T 44800 42700 5 10 1 1 0 0 1
+net=OUT_NARROWBAND:1
+}
+C 46800 42300 1 0 0 input-1.sym
+{
+T 46800 42600 5 10 0 0 0 0 1
+device=INPUT
+T 45500 42300 5 10 1 1 0 0 1
+net=OUT_LINEAR:1
+}
+C 47600 41600 1 0 0 connector3-2.sym
+{
+T 48200 43100 5 10 1 1 90 6 1
+refdes=CONN_OUTPUT
+T 47900 43250 5 10 0 0 0 0 1
+device=CONNECTOR_3
+}
+C 47500 41700 1 0 0 gnd-1.sym
