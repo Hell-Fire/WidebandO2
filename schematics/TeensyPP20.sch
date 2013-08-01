@@ -74,6 +74,8 @@ T 40900 50000 5 10 1 1 0 0 1
 refdes=F1
 T 40900 50400 5 10 0 0 0 0 1
 symversion=0.1
+T 40700 49800 5 10 0 1 0 0 1
+footprint=FUSE_1250
 }
 C 41800 49800 1 90 0 output-1.sym
 {
@@ -446,6 +448,8 @@ T 42800 46200 5 10 1 1 270 0 1
 refdes=R7
 T 42400 45900 5 10 1 1 270 0 1
 value=61.9
+T 42500 46400 5 10 1 1 0 0 1
+footprint=AXIAL_LAY 400
 }
 C 44600 47200 1 0 0 resistor-1.sym
 {
@@ -705,3 +709,14 @@ Power connector is a vertical 2 pin molex, spacing of "0.2.
 3 amp max per fuse (heater nominally draws less than an amp)
 T 40200 40600 9 10 1 0 0 0 1
 Narrowband and Linear outputs use disconnectable screwdown terminals.
+C 47300 40500 1 0 0 connector2-2.sym
+{
+T 48000 41800 5 10 1 1 0 6 1
+refdes=CONN_POWER
+T 47600 41750 5 10 0 0 0 0 1
+device=CONNECTOR_2
+T 47600 41950 5 10 0 0 0 0 1
+footprint=CONN_POWER.fp
+}
+C 47200 40600 1 0 0 gnd-1.sym
+C 47100 41300 1 0 0 12V-plus-1.sym

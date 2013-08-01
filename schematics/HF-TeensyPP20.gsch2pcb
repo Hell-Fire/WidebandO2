@@ -1,0 +1,3 @@
+schematics TeensyPP20.sch
+output-name HF-TeensyPP20
+elements-dir ./library
