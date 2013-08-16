@@ -10,7 +10,7 @@ T 53900 40100 9 10 1 0 0 0 1
 Adam Smith (Hell Fire)
 T 53800 40400 9 10 1 0 0 0 1
 1.0
-C 40300 49800 1 0 0 12V-plus-1.sym
+C 40700 49300 1 180 0 12V-plus-1.sym
 C 45000 49800 1 0 0 5V-plus-1.sym
 C 41600 48600 1 0 0 gnd-1.sym
 C 42800 49200 1 0 0 lm7805-1.sym
@@ -32,6 +32,8 @@ T 43100 49600 5 10 0 0 270 0 1
 symversion=0.1
 T 42200 49800 5 10 0 1 0 0 1
 footprint=AXIAL_LAY 300
+T 42700 49300 5 10 1 1 270 0 1
+value=22n
 }
 C 41500 49800 1 270 0 capacitor-2.sym
 {
@@ -43,6 +45,8 @@ T 42400 49600 5 10 0 0 270 0 1
 symversion=0.1
 T 41500 49800 5 10 0 1 0 0 1
 footprint=RADIAL_CAN 200
+T 41400 49300 5 10 1 1 270 0 1
+value=100u
 }
 C 44900 48900 1 90 0 capacitor-1.sym
 {
@@ -54,6 +58,8 @@ T 44000 49100 5 10 0 0 90 0 1
 symversion=0.1
 T 44900 48900 5 10 0 1 0 0 1
 footprint=AXIAL_LAY 300
+T 44500 49400 5 10 1 1 90 0 1
+value=22n
 }
 C 45000 49800 1 270 0 capacitor-2.sym
 {
@@ -65,17 +71,21 @@ T 45900 49600 5 10 0 0 270 0 1
 symversion=0.1
 T 45000 49800 5 10 0 1 0 0 1
 footprint=RADIAL_CAN 200
+T 45500 49300 5 10 1 1 270 0 1
+value=100u
 }
-C 40700 49800 1 0 0 fuse-1.sym
+C 41100 49800 1 90 0 fuse-1.sym
 {
-T 40900 50200 5 10 0 0 0 0 1
+T 40700 50000 5 10 0 0 90 0 1
 device=FUSE
-T 40900 50000 5 10 1 1 0 0 1
+T 40900 50000 5 10 1 1 90 0 1
 refdes=F1
-T 40900 50400 5 10 0 0 0 0 1
+T 40500 50000 5 10 0 0 90 0 1
 symversion=0.1
-T 40700 49800 5 10 0 1 0 0 1
+T 41100 49800 5 10 0 1 90 0 1
 footprint=FUSE_1250
+T 41300 50300 5 10 1 1 90 0 1
+value=3A
 }
 C 41800 49800 1 90 0 output-1.sym
 {
@@ -84,8 +94,7 @@ device=OUTPUT
 T 41600 50700 5 10 1 1 0 0 1
 net=H+:1
 }
-N 41600 49800 42800 49800 4
-N 41700 48900 45200 48900 4
+N 41100 48900 45200 48900 4
 N 43600 48900 43600 49200 4
 N 44400 49800 45200 49800 4
 T 42600 50500 9 10 1 0 0 0 1
@@ -133,7 +142,7 @@ symversion=0.1
 T 45500 46000 5 10 0 0 0 0 1
 slot=2
 T 45500 46000 5 10 0 0 0 0 1
-slotdef=3:10,9,11,4,8
+slotdef=2:6,5,11,4,7
 T 45500 46000 5 10 0 0 0 0 1
 slotdef=2:6,5,11,4,7
 }
@@ -150,7 +159,7 @@ symversion=0.1
 T 41600 46000 5 10 0 0 0 0 1
 slot=3
 T 41600 46000 5 10 0 0 0 0 1
-slotdef=2:6,5,11,4,7
+slotdef=3:10,9,11,4,8
 T 41600 46000 5 10 0 0 0 0 1
 slotdef=3:10,9,11,4,8
 }
@@ -706,14 +715,13 @@ N 46000 49000 46000 48600 4
 N 47400 49200 47400 50100 4
 N 47400 50100 46400 50100 4
 N 46400 50100 46400 49400 4
-N 40500 49800 40700 49800 4
-T 40200 41400 9 10 1 0 0 0 2
+T 40100 41100 9 10 1 0 0 0 2
 Fuse holders are two clamps ("0.85 space between clamps).
 Each clamp is two holes parallel to the fuse, in the center of the clamp ("0.2 apart).
-T 40200 40900 9 10 1 0 0 0 2
+T 40100 40600 9 10 1 0 0 0 2
 Power connector is a vertical 2 pin molex, spacing of "0.2.
 3 amp max per fuse (heater nominally draws less than an amp)
-T 40200 40400 9 10 1 0 0 0 2
+T 40100 40100 9 10 1 0 0 0 2
 Narrowband and Linear outputs use disconnectable screwdown terminals.
 Pins for the power and screwdowns are 0.05" holes spaced 0.2" apart.
 C 47600 40100 1 0 0 connector2-2.sym
@@ -749,5 +757,32 @@ T 48200 43100 5 10 1 1 90 6 1
 refdes=CONN_OUTPUT
 T 47900 43250 5 10 0 0 0 0 1
 device=CONNECTOR_3
+T 47600 41600 5 10 0 0 0 0 1
+footprint=CONN_WIDE 3.fp
 }
 C 47500 41700 1 0 0 gnd-1.sym
+C 40700 49300 1 90 0 schottky-1.sym
+{
+T 40028 49622 5 10 0 0 90 0 1
+device=DIODE
+T 40300 49300 5 10 1 1 90 0 1
+refdes=D1
+T 39868 49641 5 10 0 1 90 0 1
+footprint=DIODE_LAY 600
+}
+C 41300 48900 1 90 0 zener-1.sym
+{
+T 40700 49300 5 10 0 0 90 0 1
+device=ZENER_DIODE
+T 40800 49200 5 10 1 1 90 0 1
+refdes=Z1
+T 41300 48900 5 10 0 1 0 0 1
+footprint=DIODE_LAY 600
+}
+N 41100 50700 40500 50700 4
+N 40500 50700 40500 50200 4
+N 41100 49800 42800 49800 4
+T 40100 41600 9 10 1 0 0 0 3
+All C - .4", except C6, .2" and C8, .1"
+All R - .6"     D1 and Z1 - .6", .05" holes          U1 - DIP14
+Teensy pins - .6" between                               T1 and U2 - TO-220
