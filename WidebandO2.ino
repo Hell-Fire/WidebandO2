@@ -3,13 +3,12 @@
 
 
 
-
 /*
  Some configurations
 */
 
 
-#define BOARD_TEENSYPP20
+#define BOARD_UNO
 
 
 const float targetLambda = 1.0; // Narrowband simulation, cross point in lambda
@@ -26,15 +25,15 @@ int pumpSampleTime = 40; // How often the nernst cell is sampled for PID, in mil
 
 int speedOfLoop = 4; // How many millis it takes for loop to run, on Teensy++ 2.0, it's 4 millis
 
-//#define DEBUG       // DEBUG enables human readable logging and info messages
-//#define NO_SERIAL   // NO_SERIAL disables the CSV output of the controllers controls, a nice way to view this log is with OpenLogViewer - http://olv.diyefi.org/
+#define DEBUG       // DEBUG enables human readable logging and info messages
+#define NO_SERIAL   // NO_SERIAL disables the CSV output of the controllers controls, a nice way to view this log is with OpenLogViewer - http://olv.diyefi.org/
 
 
 
 /*
   Pin Definitions
 */
-#ifdef BOARD_TEENSYPP20
+#if defined(BOARD_TEENSYPP20)
 // Inputs
 const int PIN_VGND = PIN_F0; // Analog In - Level of the virtual ground
 const int PIN_VS = PIN_F1; // Analog In - Reads Nernst Cell voltage
@@ -48,6 +47,24 @@ const int POUT_IP = PIN_B4; // Analog Out - Pump cell current output, keeps Nern
 // Outputs
 const int POUT_NARROW = PIN_D0; // Digital Out - Feeds voltage divider, 0-1v signal to ECU
 const int POUT_WIDE = PIN_D1; // Analog Out - Wideband linear output
+
+
+
+#elif defined(BOARD_UNO)
+const int PIN_VGND = A0; // Analog In - Level of the virtual ground
+const int PIN_VS = A1; // Analog In - Reads Nernst Cell voltage
+const int PIN_IPA = A2; // Analog In - Measures pump current via differential amp
+
+// Sensor control
+const int POUT_VS = 7; // Digital Out - Pulses Nernst Cell to calculate internal resistance
+const int POUT_HEATER = 5; // Analog Out - Heater control, keeps Nernst cell at right temperature
+const int POUT_IP = 6; // Analog Out - Pump cell current output, keeps Nernst cell in stoich range
+
+// Outputs
+const int POUT_NARROW = 2; // Digital Out - Feeds voltage divider, 0-1v signal to ECU
+const int POUT_WIDE = 9; // Analog Out - Wideband linear output
+
+
 
 #else
 #error "No board defined"
@@ -193,6 +210,7 @@ void setup() {
   pump.SetMode(AUTOMATIC);
   
   // Start running
+  Serial.begin(115200);
   delay(1000);
   Serial.println();
   Serial.println();
@@ -219,7 +237,7 @@ void setup() {
 }
 
 #ifdef DEBUG
-elapsedMillis debug;
+int debug;
 #endif
 void loop() {
 
@@ -251,7 +269,7 @@ void loop() {
   
   serialLog(l, ipa, vgnd);
   #ifdef DEBUG
-  if (debug >= 500) {
+  if (debug++ >= 500) {
     DP("Heater: Volts: "); DP(heatIn); DP(" Target: "); DP(heatTarget); DP(" Out: "); DPL(heatOut);
     DP("Nernst: Volts: "); DP(pumpIn); DP(" Target: "); DP(pumpTarget); DP(" Out: "); DPL(pumpOut);
     DP("VGnd: "); DP(vgnd); DP(" IpA: "); DP(ipa); DP(" Lambda: "); DPL(lambda(ipa));
